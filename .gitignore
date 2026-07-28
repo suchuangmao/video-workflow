@@ -1,0 +1,11 @@
+.DS_Store
+.env
+.env.*
+dist/
+node_modules/
+__pycache__/
+*.pyc
+working_copy.json
+*_original.zip
+*_modified.zip
+_zip_meta.json

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Suchuangmao Video Workflow"
+  short_description: "Run and troubleshoot Suchuangmao AI video workflows"
+  default_prompt: "Use $suchuangmao-video-workflow to run this AI video workflow and explain any failure clearly."
