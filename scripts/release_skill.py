@@ -165,6 +165,7 @@ def build(expected_version: str | None) -> dict:
     package_sources = [
         ("SKILL.md", SKILL_FILE),
         ("LICENSE", SKILL_DIR / "LICENSE"),
+        ("agents/openai.yaml", SKILL_DIR / "agents" / "openai.yaml"),
     ]
     with zipfile.ZipFile(
         package_path,

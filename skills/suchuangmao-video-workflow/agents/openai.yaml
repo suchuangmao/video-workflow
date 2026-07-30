@@ -1,4 +1,4 @@
 interface:
-  display_name: "Suchuangmao Video Workflow"
-  short_description: "Run and troubleshoot Suchuangmao AI video workflows"
-  default_prompt: "Use $suchuangmao-video-workflow to run this AI video workflow and explain any failure clearly."
+  display_name: "速创猫 AI 视频工作流"
+  short_description: "一句话查看、运行和排查 AI 视频工作流"
+  default_prompt: "使用 $suchuangmao-video-workflow 处理我的视频工作流；自动准备并优先通过 MCP OAuth 授权。"
