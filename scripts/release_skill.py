@@ -14,6 +14,9 @@ SKILL_NAME = "suchuangmao-video-workflow"
 SKILL_DIR = ROOT / "skills" / SKILL_NAME
 SKILL_FILE = SKILL_DIR / "SKILL.md"
 DIST_DIR = ROOT / "dist"
+WORKBUDDY_MARKETPLACE_FILE = ROOT / ".codebuddy-plugin" / "marketplace.json"
+WORKBUDDY_PLUGIN_FILE = ROOT / ".codebuddy-plugin" / "plugin.json"
+WORKBUDDY_MCP_FILE = ROOT / ".mcp.json"
 
 FORBIDDEN_PARTS = {
     ".DS_Store",
@@ -92,6 +95,56 @@ def read_metadata(source: str) -> tuple[str, str, str]:
     return name, description, version_match.group(1)
 
 
+def read_json(path: Path) -> dict:
+    if not path.is_file():
+        fail(f"Missing {path.relative_to(ROOT)}")
+    try:
+        value = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as error:
+        fail(f"Invalid JSON in {path.relative_to(ROOT)}: {error}")
+    if not isinstance(value, dict):
+        fail(f"Expected JSON object in {path.relative_to(ROOT)}")
+    return value
+
+
+def validate_workbuddy_package(version: str) -> None:
+    marketplace = read_json(WORKBUDDY_MARKETPLACE_FILE)
+    plugin = read_json(WORKBUDDY_PLUGIN_FILE)
+    mcp = read_json(WORKBUDDY_MCP_FILE)
+
+    if marketplace.get("name") != "suchuangmao":
+        fail("WorkBuddy marketplace name must be suchuangmao")
+    plugins = marketplace.get("plugins")
+    if not isinstance(plugins, list) or len(plugins) != 1:
+        fail("WorkBuddy marketplace must contain exactly one plugin")
+    marketplace_plugin = plugins[0]
+    if not isinstance(marketplace_plugin, dict):
+        fail("WorkBuddy marketplace plugin entry must be an object")
+    if marketplace_plugin.get("name") != SKILL_NAME:
+        fail(f"WorkBuddy marketplace plugin name must be {SKILL_NAME}")
+    if marketplace_plugin.get("source") != ".":
+        fail("WorkBuddy marketplace plugin source must be the repository root")
+    if marketplace_plugin.get("version") != version:
+        fail("WorkBuddy marketplace version must match the Skill version")
+
+    if plugin.get("name") != SKILL_NAME:
+        fail(f"WorkBuddy plugin name must be {SKILL_NAME}")
+    if plugin.get("version") != version:
+        fail("WorkBuddy plugin version must match the Skill version")
+    if plugin.get("mcpServers") != "./.mcp.json":
+        fail("WorkBuddy plugin must load MCP servers from ./.mcp.json")
+    if plugin.get("skills") != ["./skills/"]:
+        fail("WorkBuddy plugin must load Skills from ./skills/")
+
+    server = mcp.get("mcpServers", {}).get(SKILL_NAME)
+    if not isinstance(server, dict):
+        fail(f"Missing WorkBuddy MCP server {SKILL_NAME}")
+    if server.get("type") != "http":
+        fail("WorkBuddy MCP server type must be http")
+    if server.get("url") != "https://agent.ai-tools.cn/mcp":
+        fail("WorkBuddy MCP server must use the production endpoint")
+
+
 def iter_skill_files() -> list[Path]:
     if not SKILL_DIR.is_dir():
         fail(f"Missing Skill directory: {SKILL_DIR}")
@@ -137,6 +190,7 @@ def validate() -> dict:
 
     source = SKILL_FILE.read_text(encoding="utf-8")
     name, description, version = read_metadata(source)
+    validate_workbuddy_package(version)
     return {
         "name": name,
         "description": description,

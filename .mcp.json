@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "suchuangmao-video-workflow": {
+      "type": "http",
+      "url": "https://agent.ai-tools.cn/mcp",
+      "description": "速创猫 AI 视频工作流：查看、校验、运行、查询进度并续跑视频生成任务"
+    }
+  }
+}

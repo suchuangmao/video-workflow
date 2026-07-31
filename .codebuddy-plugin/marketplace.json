@@ -1,0 +1,32 @@
+{
+  "name": "suchuangmao",
+  "description": "速创猫官方 Agent Skill 与 MCP 连接器市场",
+  "owner": {
+    "name": "速创猫",
+    "email": "support@ai-tools.cn"
+  },
+  "plugins": [
+    {
+      "name": "suchuangmao-video-workflow",
+      "source": ".",
+      "description": "速创猫 AI 视频工作流 Skill：查看、校验、运行、查询进度并续跑视频生成任务，兼容 Coze/扣子工作流。",
+      "version": "1.0.0",
+      "author": {
+        "name": "速创猫"
+      },
+      "homepage": "https://agent.ai-tools.cn/video-workflow-skill",
+      "repository": "https://github.com/suchuangmao/video-workflow",
+      "license": "MIT",
+      "category": "视频",
+      "keywords": [
+        "AI 视频工作流",
+        "视频工作流",
+        "Coze",
+        "扣子",
+        "MCP",
+        "OAuth",
+        "速创猫"
+      ]
+    }
+  ]
+}
