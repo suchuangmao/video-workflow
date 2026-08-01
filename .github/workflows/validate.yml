@@ -31,5 +31,5 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          version="$(node --print \"require('./package.json').version\")"
+          version="$(node --print "require('./package.json').version")"
           python3 scripts/release_skill.py --build --expected-version "$version"
