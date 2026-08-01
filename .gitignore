@@ -1,11 +1,25 @@
-.DS_Store
+# Dependencies and generated output
+node_modules/
+dist/
+coverage/
+.cache/
+.tmp/
+*.tgz
+
+# Local environment and credentials
 .env
 .env.*
-dist/
-node_modules/
-__pycache__/
-*.pyc
-working_copy.json
-*_original.zip
-*_modified.zip
-_zip_meta.json
+!.env.example
+*.key
+*.pem
+*.p12
+
+# Logs and local tooling
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.DS_Store
+.idea/
+.vscode/

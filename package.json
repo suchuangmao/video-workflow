@@ -1,0 +1,44 @@
+{
+  "name": "suchuangmao-video-workflow",
+  "version": "2.0.0",
+  "description": "速创猫 AI 视频工作流 Skill 与官方 REST API 使用清单",
+  "private": true,
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/suchuangmao/video-workflow"
+  },
+  "homepage": "https://agent.ai-tools.cn/video-workflow-skill",
+  "license": "MIT",
+  "keywords": [
+    "coze",
+    "Coze 视频工作流",
+    "扣子",
+    "coze workflow",
+    "扣子工作流",
+    "ai video",
+    "AI视频生成",
+    "video workflow",
+    "video-workflow",
+    "视频工作流",
+    "视频工作流插件",
+    "一键生成短视频",
+    "短视频自动化",
+    "工作流运行",
+    "工作流排错",
+    "工作流续跑",
+    "失败任务续跑",
+    "生成进度",
+    "agent skill",
+    "agent-skill",
+    "REST API",
+    "速创猫",
+    "速创猫 AI 视频工作流",
+    "AI 视频工作流 Skill"
+  ],
+  "scripts": {
+    "sync": "node scripts/sync-manifests.mjs",
+    "sync:check": "node scripts/sync-manifests.mjs --check",
+    "test": "npm run sync:check && node scripts/validate.mjs"
+  }
+}

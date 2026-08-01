@@ -22,11 +22,17 @@ jobs:
         with:
           persist-credentials: false
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
       - name: Validate and package
         shell: bash
         run: |
           set -euo pipefail
           version="${GITHUB_REF_NAME#v}"
+          npm test
           python3 scripts/release_skill.py --build --expected-version "$version"
 
       - name: Create GitHub Release

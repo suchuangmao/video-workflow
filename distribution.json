@@ -1,0 +1,79 @@
+{
+  "name": "suchuangmao-video-workflow",
+  "marketplaceName": "suchuangmao",
+  "displayName": "速创猫 AI 视频工作流 Skill",
+  "version": "2.0.0",
+  "description": "速创猫 AI 视频工作流 Skill：通过官方 REST API 一句话查看、校验、运行、查进度、排错并续跑视频生成工作流，兼容 Coze/扣子工作流。",
+  "packageDescription": "速创猫 AI 视频工作流 Skill 与官方 REST API 使用清单",
+  "shortDescription": "直接查看、校验、运行、续跑和排查速创猫 AI 视频工作流",
+  "longDescription": "从可信环境读取 SCM_API_KEY，通过官方 REST API 查看、导入、校验、运行、查询、续跑和取消 AI 视频工作流；兼容 Coze/扣子工作流。",
+  "homepage": "https://agent.ai-tools.cn/video-workflow-skill",
+  "repository": "https://github.com/suchuangmao/video-workflow",
+  "license": "MIT",
+  "author": {
+    "name": "速创猫",
+    "email": "support@ai-tools.cn",
+    "url": "https://agent.ai-tools.cn"
+  },
+  "skill": {
+    "canonicalUrl": "https://agent.ai-tools.cn/video-workflow-skill",
+    "manifestUrl": "https://agent.ai-tools.cn/video-workflow-skill.json",
+    "markdownUrl": "https://agent.ai-tools.cn/video-workflow-skill/SKILL.md"
+  },
+  "api": {
+    "baseUrl": "https://agent.ai-tools.cn",
+    "authentication": "x-api-key",
+    "credentialEnv": "SCM_API_KEY",
+    "executionMode": "async",
+    "wait": false
+  },
+  "compatibility": {
+    "protocol": "Agent Skill + HTTPS REST API",
+    "authentication": "x-api-key from trusted SCM_API_KEY environment",
+    "hostRequirement": "支持安装 Agent Skill、读取可信环境变量并发起 HTTPS 请求",
+    "examples": [
+      "Claude Code",
+      "Codex",
+      "Cursor",
+      "OpenCode",
+      "WorkBuddy",
+      "ChatGPT",
+      "Manus",
+      "Qoder",
+      "TRAE"
+    ]
+  },
+  "interface": {
+    "displayName": "速创猫 AI 视频工作流",
+    "shortDescription": "直接查看、校验、运行、续跑和排查速创猫 AI 视频工作流",
+    "icon": "./assets/scm-logo.png",
+    "brandColor": "#5B4CF0",
+    "defaultPrompt": "使用 $suchuangmao-video-workflow 运行一个现成的视频工作流。"
+  },
+  "keywords": [
+    "coze",
+    "Coze 视频工作流",
+    "扣子",
+    "coze workflow",
+    "扣子工作流",
+    "ai video",
+    "AI视频生成",
+    "video workflow",
+    "video-workflow",
+    "视频工作流",
+    "视频工作流插件",
+    "一键生成短视频",
+    "短视频自动化",
+    "工作流运行",
+    "工作流排错",
+    "工作流续跑",
+    "失败任务续跑",
+    "生成进度",
+    "agent skill",
+    "agent-skill",
+    "REST API",
+    "速创猫",
+    "速创猫 AI 视频工作流",
+    "AI 视频工作流 Skill"
+  ]
+}

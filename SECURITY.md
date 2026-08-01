@@ -1,19 +1,39 @@
-# Security Policy
+# 安全政策
 
-## Report a vulnerability
+## 支持范围
 
-Please report vulnerabilities privately to `leeyw@ai-tools.cn`.
+本政策覆盖：
 
-Do not open a public issue containing:
+- 本仓库发布的 Agent Skill、宿主清单、同步脚本和校验脚本；
+- 与本项目配套的速创猫官方 REST API 中可由外部用户触发的安全问题。
 
-- API keys, tokens, cookies, or credentials;
-- customer or private workflow files;
-- signed media URLs;
-- private document links;
-- execution logs containing personal or proprietary data.
+请基于主分支或最新正式版本复现问题。历史版本会根据影响范围和修复成本决定是否回补。
 
-Include the affected version, a minimal reproduction, the expected behavior, and the security impact. Remove unrelated user data before sending evidence.
+## 报告漏洞
 
-## Supported versions
+请不要在公开 Issue、讨论区或社交平台披露尚未修复的漏洞。请发送邮件至 [support@ai-tools.cn](mailto:support@ai-tools.cn)，主题以 `[SECURITY]` 开头，并尽量包含：
 
-Security fixes are provided for the latest GitHub Release.
+- 受影响的仓库版本、接口地址或功能；
+- 可重复且不包含真实密钥、个人信息的复现步骤；
+- 实际影响和你建议的严重级别；
+- 必要的截图、请求样例或最小验证代码；
+- 便于联系你的方式，以及是否希望在公告中署名。
+
+不要发送真实 Token、API Key、Cookie、验证码、工作流私密数据或其他用户数据。确需交换敏感材料时，请先通过邮件约定安全传输方式。
+
+我们通常争取在 3 个工作日内确认收到报告，并在 7 个工作日内完成初步分级。修复与披露时间会根据严重性、复现难度和受影响范围协商确定；这些时间是处理目标，不构成服务承诺。
+
+## 善意研究
+
+在遵守适用法律、仅使用你有权访问的账号和数据、不影响其他用户、不过度请求服务且不扩大漏洞影响的前提下，我们欢迎善意安全研究。请在修复完成并与我们约定披露时间前保密。
+
+以下行为不在授权范围内：
+
+- 社会工程、钓鱼、骚扰或物理攻击；
+- 拒绝服务、压力测试或可能降低服务可用性的自动化扫描；
+- 访问、修改、下载或传播不属于你的数据；
+- 使用漏洞牟利、勒索，或在问题修复前公开利用细节。
+
+## 普通问题
+
+安装、API Key 配置、工作流输入和功能建议不属于安全漏洞，请通过 [support@ai-tools.cn](mailto:support@ai-tools.cn) 联系支持。

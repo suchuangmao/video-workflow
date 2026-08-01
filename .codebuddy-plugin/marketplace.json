@@ -1,0 +1,47 @@
+{
+  "name": "suchuangmao",
+  "description": "速创猫 AI 视频工作流 Skill 的 WorkBuddy 第三方 Skill 市场",
+  "owner": {
+    "name": "速创猫",
+    "email": "support@ai-tools.cn"
+  },
+  "plugins": [
+    {
+      "name": "suchuangmao-video-workflow",
+      "source": ".",
+      "description": "速创猫 AI 视频工作流 Skill：通过官方 REST API 一句话查看、校验、运行、查进度、排错并续跑视频生成工作流，兼容 Coze/扣子工作流。",
+      "version": "2.0.0",
+      "author": {
+        "name": "速创猫"
+      },
+      "category": "视频",
+      "keywords": [
+        "coze",
+        "Coze 视频工作流",
+        "扣子",
+        "coze workflow",
+        "扣子工作流",
+        "ai video",
+        "AI视频生成",
+        "video workflow",
+        "video-workflow",
+        "视频工作流",
+        "视频工作流插件",
+        "一键生成短视频",
+        "短视频自动化",
+        "工作流运行",
+        "工作流排错",
+        "工作流续跑",
+        "失败任务续跑",
+        "生成进度",
+        "agent skill",
+        "agent-skill",
+        "REST API",
+        "速创猫",
+        "速创猫 AI 视频工作流",
+        "AI 视频工作流 Skill"
+      ],
+      "license": "MIT"
+    }
+  ]
+}

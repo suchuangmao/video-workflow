@@ -14,6 +14,8 @@ SKILL_NAME = "suchuangmao-video-workflow"
 SKILL_DIR = ROOT / "skills" / SKILL_NAME
 SKILL_FILE = SKILL_DIR / "SKILL.md"
 DIST_DIR = ROOT / "dist"
+LOGO_FILE = SKILL_DIR / "assets" / "scm-logo.png"
+PNG_SIGNATURE = b"\x89PNG\r\n\x1a\n"
 
 FORBIDDEN_PARTS = {
     ".DS_Store",
@@ -120,6 +122,11 @@ def validate() -> dict:
 
         content = path.read_bytes()
         total_bytes += len(content)
+        if path == LOGO_FILE:
+            if not content.startswith(PNG_SIGNATURE):
+                fail(f"Skill logo must be a PNG file: {relative}")
+            continue
+
         if b"\r\n" in content:
             fail(f"CRLF line endings are not allowed: {relative}")
 
@@ -166,6 +173,7 @@ def build(expected_version: str | None) -> dict:
         ("SKILL.md", SKILL_FILE),
         ("LICENSE", SKILL_DIR / "LICENSE"),
         ("agents/openai.yaml", SKILL_DIR / "agents" / "openai.yaml"),
+        ("assets/scm-logo.png", LOGO_FILE),
     ]
     with zipfile.ZipFile(
         package_path,
