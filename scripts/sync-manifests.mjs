@@ -106,6 +106,7 @@ addJson('.codex-plugin/plugin.json', {
     defaultPrompt: [
       '列出我的速创猫 AI 视频工作流。',
       '校验并运行这个 AI 视频生成工作流，持续告诉我进度。',
+      '二创这个已有视频工作流的提示词或视觉分镜，并保留源工作流。',
       '排查失败原因，并从失败节点续跑这个视频工作流。',
     ],
     brandColor: skillInterface.brandColor,

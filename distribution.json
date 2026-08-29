@@ -2,11 +2,11 @@
   "name": "suchuangmao-video-workflow",
   "marketplaceName": "suchuangmao",
   "displayName": "速创猫 AI 视频工作流 Skill",
-  "version": "2.0.0",
-  "description": "速创猫 AI 视频工作流 Skill：通过官方 REST API 一句话查看、校验、运行、查进度、排错并续跑视频生成工作流，兼容 Coze/扣子工作流。",
-  "packageDescription": "速创猫 AI 视频工作流 Skill 与官方 REST API 使用清单",
-  "shortDescription": "直接查看、校验、运行、续跑和排查速创猫 AI 视频工作流",
-  "longDescription": "从可信环境读取 SCM_API_KEY，通过官方 REST API 查看、导入、校验、运行、查询、续跑和取消 AI 视频工作流；兼容 Coze/扣子工作流。",
+  "version": "2.1.0",
+  "description": "速创猫 AI 视频工作流 Skill：通过官方 REST API 一句话查看、校验、运行、二创、查进度、排错并续跑视频生成工作流，兼容 Coze/扣子工作流。",
+  "packageDescription": "速创猫 AI 视频工作流 Skill、二创能力与官方 REST API 使用清单",
+  "shortDescription": "直接查看、校验、运行、二创、续跑和排查速创猫 AI 视频工作流",
+  "longDescription": "从可信环境读取 SCM_API_KEY，通过官方 REST API 查看、导入、校验、运行、二创、查询、续跑和取消 AI 视频工作流；二创能力由服务端动态鉴权，当前仅向有效 SVIP 开放，兼容 Coze/扣子工作流。",
   "homepage": "https://agent.ai-tools.cn/video-workflow-skill",
   "repository": "https://github.com/suchuangmao/video-workflow",
   "license": "MIT",
@@ -45,10 +45,10 @@
   },
   "interface": {
     "displayName": "速创猫 AI 视频工作流",
-    "shortDescription": "直接查看、校验、运行、续跑和排查速创猫 AI 视频工作流",
+    "shortDescription": "直接查看、校验、运行、二创、续跑和排查速创猫 AI 视频工作流",
     "icon": "./assets/scm-logo.png",
     "brandColor": "#5B4CF0",
-    "defaultPrompt": "使用 $suchuangmao-video-workflow 运行一个现成的视频工作流。"
+    "defaultPrompt": "使用 $suchuangmao-video-workflow 运行或二创一个现成的视频工作流。"
   },
   "keywords": [
     "coze",
@@ -65,6 +65,8 @@
     "一键生成短视频",
     "短视频自动化",
     "工作流运行",
+    "工作流二创",
+    "视频工作流二创",
     "工作流排错",
     "工作流续跑",
     "失败任务续跑",

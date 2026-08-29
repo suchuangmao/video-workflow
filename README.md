@@ -1,6 +1,6 @@
 # 速创猫 AI 视频工作流 Skill
 
-一句话通过速创猫官方 REST API 查看、导入、校验、运行、查进度、排错并续跑 AI 视频工作流，兼容 Coze/扣子工作流。
+一句话通过速创猫官方 REST API 查看、导入、校验、运行、二创、查进度、排错并续跑 AI 视频工作流，兼容 Coze/扣子工作流。
 
 源码仓库：https://github.com/suchuangmao/video-workflow
 
@@ -28,6 +28,9 @@
 - 读取 workflowId、资源库链接或工作流文件；
 - 导入官方体验工作流或本地工作流文件；
 - 校验业务输入并异步运行工作流；
+- 通过同一 Skill 异步二创已有工作流，当前支持提示词与视觉分镜修改；
+- 二创权限以后端 capability 的 `allowed` / `reasonCode` 为准，当前仅向有效 SVIP 开放；
+- 二创成功后生成新的派生工作流，源工作流始终只读且不会被覆盖；
 - 查询 executionId 的状态与日志；
 - 从失败节点续跑或取消任务；
 - 上传本次任务明确需要的临时素材；
@@ -90,7 +93,7 @@ npm test
 
 ## 搜索关键词
 
-速创猫 AI 视频工作流、AI 视频工作流 Skill、Coze 视频工作流、扣子工作流、AI 视频生成、一键生成短视频、短视频自动化、视频工作流、视频工作流插件、工作流运行、工作流排错、工作流续跑、失败任务续跑、生成进度、Agent Skill、REST API、coze workflow、video workflow。
+速创猫 AI 视频工作流、AI 视频工作流 Skill、Coze 视频工作流、扣子工作流、AI 视频生成、一键生成短视频、短视频自动化、视频工作流、视频工作流插件、工作流运行、工作流二创、视频工作流二创、工作流排错、工作流续跑、失败任务续跑、生成进度、Agent Skill、REST API、coze workflow、video workflow。
 
 ## License
 

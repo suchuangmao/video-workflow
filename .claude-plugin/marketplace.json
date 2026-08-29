@@ -6,17 +6,17 @@
     "url": "https://agent.ai-tools.cn"
   },
   "description": "速创猫 AI 视频工作流 Skill 的 Claude Code Skill 市场",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "metadata": {
     "description": "速创猫 AI 视频工作流 Skill 的 Claude Code Skill 市场",
-    "version": "2.0.0"
+    "version": "2.1.0"
   },
   "plugins": [
     {
       "name": "suchuangmao-video-workflow",
       "source": "./",
-      "description": "速创猫 AI 视频工作流 Skill：通过官方 REST API 一句话查看、校验、运行、查进度、排错并续跑视频生成工作流，兼容 Coze/扣子工作流。",
-      "version": "2.0.0",
+      "description": "速创猫 AI 视频工作流 Skill：通过官方 REST API 一句话查看、校验、运行、二创、查进度、排错并续跑视频生成工作流，兼容 Coze/扣子工作流。",
+      "version": "2.1.0",
       "author": {
         "name": "速创猫",
         "email": "support@ai-tools.cn",
@@ -40,6 +40,8 @@
         "一键生成短视频",
         "短视频自动化",
         "工作流运行",
+        "工作流二创",
+        "视频工作流二创",
         "工作流排错",
         "工作流续跑",
         "失败任务续跑",

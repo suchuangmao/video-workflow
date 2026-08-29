@@ -1,7 +1,7 @@
 {
   "name": "suchuangmao-video-workflow",
-  "version": "2.0.0",
-  "description": "速创猫 AI 视频工作流 Skill：通过官方 REST API 一句话查看、校验、运行、查进度、排错并续跑视频生成工作流，兼容 Coze/扣子工作流。",
+  "version": "2.1.0",
+  "description": "速创猫 AI 视频工作流 Skill：通过官方 REST API 一句话查看、校验、运行、二创、查进度、排错并续跑视频生成工作流，兼容 Coze/扣子工作流。",
   "author": {
     "name": "速创猫",
     "url": "https://agent.ai-tools.cn"
@@ -24,6 +24,8 @@
     "一键生成短视频",
     "短视频自动化",
     "工作流运行",
+    "工作流二创",
+    "视频工作流二创",
     "工作流排错",
     "工作流续跑",
     "失败任务续跑",
@@ -38,8 +40,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "速创猫 AI 视频工作流 Skill",
-    "shortDescription": "直接查看、校验、运行、续跑和排查速创猫 AI 视频工作流",
-    "longDescription": "从可信环境读取 SCM_API_KEY，通过官方 REST API 查看、导入、校验、运行、查询、续跑和取消 AI 视频工作流；兼容 Coze/扣子工作流。",
+    "shortDescription": "直接查看、校验、运行、二创、续跑和排查速创猫 AI 视频工作流",
+    "longDescription": "从可信环境读取 SCM_API_KEY，通过官方 REST API 查看、导入、校验、运行、二创、查询、续跑和取消 AI 视频工作流；二创能力由服务端动态鉴权，当前仅向有效 SVIP 开放，兼容 Coze/扣子工作流。",
     "developerName": "速创猫",
     "category": "Productivity",
     "capabilities": [
@@ -50,6 +52,7 @@
     "defaultPrompt": [
       "列出我的速创猫 AI 视频工作流。",
       "校验并运行这个 AI 视频生成工作流，持续告诉我进度。",
+      "二创这个已有视频工作流的提示词或视觉分镜，并保留源工作流。",
       "排查失败原因，并从失败节点续跑这个视频工作流。"
     ],
     "brandColor": "#5B4CF0"

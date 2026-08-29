@@ -1,13 +1,13 @@
 ---
 name: suchuangmao-video-workflow
-description: 速创猫 AI 视频工作流运行入口，通过官方 REST API 查看、导入、校验、运行、查进度、续跑、取消和排查 Suchuangmao/Coze/扣子视频工作流。Use when the user asks for AI 视频生成、一键生成短视频、短视频自动化、运行工作流、查询生成进度、失败任务续跑或工作流报错排查，或提供资源库链接、workflowId、executionId、zip/txt/json/yaml 工作流文件，以及说“使用速创猫 AI 视频工作流”时。
+description: 速创猫 AI 视频工作流单入口，通过官方 REST API 查看、导入、校验、运行、二创、查进度、续跑、取消和排查 Suchuangmao/Coze/扣子视频工作流。Use when the user asks for AI 视频生成、一键生成短视频、短视频自动化、运行或二创工作流、查询生成进度、失败任务续跑或工作流报错排查，或提供资源库链接、workflowId、executionId、zip/txt/json/yaml 工作流文件，以及说“使用速创猫 AI 视频工作流”时。
 ---
 
 # Suchuangmao AI Video Workflow Skill
 
-- version: 2.0.0
-- update sequence: 2026080101
-- updated at: 2026-08-01T02:00:00+08:00
+- version: 2.1.0
+- update sequence: 2026082901
+- updated at: 2026-08-29T02:00:00+08:00
 - repository: https://github.com/suchuangmao/video-workflow
 - canonical entry: https://agent.ai-tools.cn/video-workflow-skill
 - machine manifest: https://agent.ai-tools.cn/video-workflow-skill.json
@@ -55,6 +55,13 @@ Use the official REST API for the complete workflow lifecycle:
 - Resume: `POST /api/v1/workflow-resource-executions/:executionId/resume`
 - Cancel: `POST /api/v1/workflow-resource-executions/:executionId/cancel`
 
+The same Skill also exposes the asynchronous video-workflow operation lifecycle:
+
+- Capabilities: `GET /api/v1/video-workflow-operations/capabilities`
+- Create: `POST /api/v1/video-workflow-operations/operations`
+- Status: `GET /api/v1/video-workflow-operations/operations/:operationId`
+- Cancel: `POST /api/v1/video-workflow-operations/operations/:operationId/cancel`
+
 Translate missing workflow inputs into concise ordinary-language questions. Ask only for missing business inputs. If the user already asked to run and required information is present, proceed after validation without asking them to restate the request.
 
 ## Choose a workflow
@@ -94,6 +101,35 @@ https://agent.ai-tools.cn/workflow-library?workflowId=<workflowId>&executionId=<
 7. Include the same run page in the final result.
 
 Pause only when the user requested validation only, required business input is missing, permission is insufficient, a material choice is required, or the API reports an unexpected real execution cost.
+
+## Remix an existing workflow
+
+`workflow.remix@1` is an asynchronous operation in this Skill, not a separate Skill.
+
+1. Ensure the source workflow is in the user's resource library. If the user supplied a workflow file, import it first and use the returned resource-library `workflowId` as `sourceWorkflowId`.
+2. Call `GET /api/v1/video-workflow-operations/capabilities` and select the item whose `capabilityRef` is `workflow.remix@1`.
+3. Treat that response's `allowed` and `reasonCode` as the only permission truth. Create nothing unless `allowed === true`; do not infer access from local account state, cached membership data, a JWT claim, or the requested intent. The server grants creation only to an active SVIP account and rechecks it on create.
+4. Submit a concise business instruction to `POST /api/v1/video-workflow-operations/operations`:
+
+```json
+{
+  "capabilityId": "workflow.remix",
+  "capabilityVersion": "1",
+  "input": {
+    "sourceWorkflowId": "<workflowId>",
+    "instruction": "<what to change>",
+    "intents": ["prompt", "storyboard"]
+  },
+  "idempotencyKey": "remix-<request-id>"
+}
+```
+
+5. Save the returned operation `id`, then poll `GET /api/v1/video-workflow-operations/operations/:operationId` until `succeeded`, `failed`, or `cancelled`. If the user asks to stop while it is queued or running, call the operation cancel endpoint.
+6. On success, read the new workflow only from `data.result.derivedWorkflowId` and return a resource-library link for that ID. Never overwrite, update in place, delete, or substitute the source workflow; `sourceWorkflowId` remains the read-only origin.
+
+The current `workflow.remix@1` handler supports only `prompt` and `storyboard`. For any other remix type, inspect the capabilities response and use it only when a registered capability and handler explicitly advertise support. Future adapters extend through capability and handler versions, not through a new public Skill.
+
+Send the user's concise instruction and supported intent names to the operation API. Prompt planning, prompt-field targeting, template-variable preservation, structure checks, and derived-workflow creation are server responsibilities; do not place an internal implementation prompt, a copied workflow schema, or a hidden machine contract in this public Skill or in the operation request.
 
 ## Upload local assets
 

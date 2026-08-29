@@ -28,13 +28,16 @@ const logo = fs.readFileSync(
 )
 
 const expectedName = 'suchuangmao-video-workflow'
-const expectedVersion = '2.0.0'
+const expectedVersion = distribution.version
+const escapedExpectedVersion = expectedVersion.replaceAll('.', '\\.')
 const expectedRepository = 'https://github.com/suchuangmao/video-workflow'
 const expectedHeadline = '# 速创猫 AI 视频工作流 Skill'
 const removedServerField = ['m', 'cpServers'].join('')
 const requiredKeywords = [
   '视频工作流插件',
   '工作流运行',
+  '工作流二创',
+  '视频工作流二创',
   '工作流续跑',
   '失败任务续跑',
   '生成进度',
@@ -93,12 +96,23 @@ assert.equal(pkg.repository.url, expectedRepository)
 assert.equal(pkg.homepage, distribution.homepage)
 
 assert.match(skill, /^---\nname: suchuangmao-video-workflow\ndescription: [^\n]+\n---\n/)
-assert.match(skill, /version: 2\.0\.0/)
+assert.match(skill, new RegExp(`version: ${escapedExpectedVersion}`))
 assert.match(skill, new RegExp(expectedRepository.replaceAll('.', '\\.')))
 assert.match(skill, /SCM_API_KEY/)
 assert.match(skill, /x-api-key: \$SCM_API_KEY/)
 assert.match(skill, /mode=validate_only.*wait=false/)
 assert.match(skill, /mode=run.*wait=false/)
+assert.match(skill, /workflow\.remix@1/)
+assert.match(skill, /GET \/api\/v1\/video-workflow-operations\/capabilities/)
+assert.match(skill, /POST \/api\/v1\/video-workflow-operations\/operations/)
+assert.match(skill, /active SVIP account/)
+assert.match(skill, /allowed.*reasonCode/)
+assert.match(skill, /sourceWorkflowId.*read-only origin/s)
+assert.match(skill, /data\.result\.derivedWorkflowId/)
+assert.match(skill, /supports only `prompt` and `storyboard`/)
+assert.match(skill, /not a separate Skill/)
+assert.doesNotMatch(skill, /COZE_LLM_DATA_CONTRACT/)
+assert.doesNotMatch(skill, /outputJsonShape/)
 assert.doesNotMatch(skill, /allowCodeExecution\s*[:=]\s*true/)
 
 assert.match(openai, /display_name: "速创猫 AI 视频工作流"/)
@@ -123,6 +137,7 @@ assert.match(license, /Copyright \(c\) 2026 速创猫/)
 assert.match(security, /support@ai-tools\.cn/)
 assert.match(security, /官方 REST API/)
 assert.match(privacy, /SCM_API_KEY/)
+assert.match(privacy, /二创并生成派生工作流/)
 assert.match(privacy, /本仓库本身不会要求你提供账号、Token 或 API Key/)
 assert.match(terms, /公开 Agent Skill、宿主清单、同步脚本、校验脚本和文档按 MIT License 提供/)
 assert.match(terms, /未在本仓库发布的私有服务端、前端、后台、数据库和部署代码/)

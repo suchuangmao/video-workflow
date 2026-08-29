@@ -1,7 +1,7 @@
 {
   "name": "suchuangmao-video-workflow",
-  "version": "2.0.0",
-  "description": "速创猫 AI 视频工作流 Skill 与官方 REST API 使用清单",
+  "version": "2.1.0",
+  "description": "速创猫 AI 视频工作流 Skill、二创能力与官方 REST API 使用清单",
   "private": true,
   "type": "module",
   "repository": {
@@ -25,6 +25,8 @@
     "一键生成短视频",
     "短视频自动化",
     "工作流运行",
+    "工作流二创",
+    "视频工作流二创",
     "工作流排错",
     "工作流续跑",
     "失败任务续跑",
