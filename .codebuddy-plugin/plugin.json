@@ -1,7 +1,7 @@
 {
   "name": "suchuangmao-video-workflow",
-  "version": "2.1.0",
-  "description": "速创猫 AI 视频工作流 Skill：通过官方 REST API 一句话查看、校验、运行、二创、查进度、排错并续跑视频生成工作流，兼容 Coze/扣子工作流。",
+  "version": "2.2.0",
+  "description": "速创猫 AI 视频工作流 Skill：通过官方 REST API 查看、校验、运行、二创、查进度、排错并续跑视频生成工作流；参考视频二创先由 Agent 逆向提炼可迁移的视觉语言。",
   "author": {
     "name": "速创猫",
     "url": "https://agent.ai-tools.cn"

@@ -1,7 +1,7 @@
 {
   "name": "suchuangmao-video-workflow",
-  "version": "2.1.0",
-  "description": "速创猫 AI 视频工作流 Skill、二创能力与官方 REST API 使用清单",
+  "version": "2.2.0",
+  "description": "速创猫 AI 视频工作流 Skill、Agent 侧参考视频逆向拆解与官方 REST API 使用清单",
   "private": true,
   "type": "module",
   "repository": {

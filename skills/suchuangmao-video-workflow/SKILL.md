@@ -1,13 +1,13 @@
 ---
 name: suchuangmao-video-workflow
-description: 速创猫 AI 视频工作流单入口，通过官方 REST API 查看、导入、校验、运行、二创、查进度、续跑、取消和排查 Suchuangmao/Coze/扣子视频工作流。Use when the user asks for AI 视频生成、一键生成短视频、短视频自动化、运行或二创工作流、查询生成进度、失败任务续跑或工作流报错排查，或提供资源库链接、workflowId、executionId、zip/txt/json/yaml 工作流文件，以及说“使用速创猫 AI 视频工作流”时。
+description: 速创猫 AI 视频工作流单入口，通过官方 REST API 查看、导入、校验、运行、二创、查进度、续跑、取消和排查 Suchuangmao/Coze/扣子视频工作流；参考视频二创时先由 Agent 逆向提炼可迁移的视觉语言。Use when the user asks for AI 视频生成、一键生成短视频、短视频自动化、运行或二创工作流、参考视频风格拆解、查询生成进度、失败任务续跑或工作流报错排查，或提供资源库链接、workflowId、executionId、zip/txt/json/yaml 工作流文件，以及说“使用速创猫 AI 视频工作流”时。
 ---
 
 # Suchuangmao AI Video Workflow Skill
 
-- version: 2.1.0
-- update sequence: 2026082901
-- updated at: 2026-08-29T02:00:00+08:00
+- version: 2.2.0
+- update sequence: 2026082902
+- updated at: 2026-08-29T14:30:00+08:00
 - repository: https://github.com/suchuangmao/video-workflow
 - canonical entry: https://agent.ai-tools.cn/video-workflow-skill
 - machine manifest: https://agent.ai-tools.cn/video-workflow-skill.json
@@ -105,6 +105,35 @@ Pause only when the user requested validation only, required business input is m
 ## Remix an existing workflow
 
 `workflow.remix@1` is an asynchronous operation in this Skill, not a separate Skill.
+
+### Reverse a reference video before remix
+
+When the user supplies a reference video, asks to match a reference style, or identifies only part of a video as the target style, Codex or WorkBuddy must analyze the reference before creating the remix operation. This is an Agent-side reasoning step; the current backend does not inspect the reference video.
+
+1. Establish the evidence range first. Record the user-approved include ranges and exclude ranges; exclusion wins. Analyze only the effective ranges. Do not infer style from an intro, advertisement, talking-head insert, watermark segment, unrelated chapter, or any interval the user excluded.
+2. Split every observation into two channels:
+   - Reference content, which must not transfer: people, animals, products, props, places, literal text, brands, claims, story events, exact object counts, exact coordinates, and original shot order.
+   - Transferable visual language: material construction, color roles, spatial layering, information-visualization method, object appearance mechanism, action grammar, camera response, timing, continuity, and the relationship between an action and its visible result.
+3. Apply the noun-replacement test. Replace every concrete noun from the reference with “subject”, “carrier”, “obstacle”, or “result”. If the observation still describes a useful visual rule, it may transfer; if it stops making sense, treat it as reference content and discard it.
+4. Prefer recurring evidence. A behavior seen repeatedly in the effective ranges may become a global rule. A one-off flourish remains optional unless the user explicitly asks for it.
+5. Compile a concise `Reference Visual Language Brief` with these fields:
+   - `scope`: effective and excluded ranges;
+   - `material`: medium, surface, edge treatment, dimensionality, and lighting;
+   - `color`: base colors, accent roles, and contrast logic;
+   - `space`: stage model, layer depth, composition families, and persistent anchors;
+   - `information`: how the reference explains mechanism, comparison, process, causality, or conclusion;
+   - `appearance`: how existing objects reveal, unfold, slide, emerge, assemble, or replace one another;
+   - `motion`: carrier, strong action, trajectory, contact, physical response, and visible result;
+   - `camera`: how the camera responds after the subject starts moving;
+   - `timing`: action onset, information load, motion coverage, and ending behavior;
+   - `continuity`: how one visible result becomes the carrier of the next action;
+   - `antiPatterns`: behaviors that make the target look like a slideshow or a mechanical copy;
+   - `doNotTransfer`: concrete reference content and distinctive shot events.
+6. Map the brief back to the target script. Each generated visual segment should communicate one main idea and at most one compatible secondary idea. Choose subjects and props from the target content, then instantiate motion as `existing carrier -> action -> trajectory -> contact -> visible result`. Do not copy the reference video's entities, shot sequence, or distinctive composition.
+7. For video prompts, describe who is where, what moves first, where an object appears from, how it moves or transforms, how the camera responds, and what readable visual state the shot reaches. Style adjectives alone are not a motion plan. The subject should normally initiate the action and the camera should respond.
+8. Send only the sanitized visual-language brief and the user's target goal inside the operation `instruction`. Do not send raw frames, OCR text, local file paths, the reference asset itself, or a copied shot list to `workflow.remix@1`. Do not upload the reference video unless a future registered capability explicitly requests it.
+
+For a paper-craft reference, for example, “a heart becomes a phone” is content and must not transfer; “an existing central paper carrier splits, its fragments reassemble, and the new form immediately carries the next information state” is transferable motion grammar.
 
 1. Ensure the source workflow is in the user's resource library. If the user supplied a workflow file, import it first and use the returned resource-library `workflowId` as `sourceWorkflowId`.
 2. Call `GET /api/v1/video-workflow-operations/capabilities` and select the item whose `capabilityRef` is `workflow.remix@1`.
